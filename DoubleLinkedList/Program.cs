@@ -106,25 +106,25 @@ namespace DoubleLinkedList
         #endregion
         #region Method AddAfter(add item to the list after define index)
 
-        public bool AddAfter(T item,int index)
+        public bool AddAfter(T item, int index)
         {
-            if (Count<index)
+            if (Count < index)
             {
                 return false;
             }
 
             Node<T> node = new Node<T>(item);
             Node<T> current = head;
-            int i = 0; 
+            int i = 0;
 
 
-            while (current!=null&&i!=index)
+            while (current != null && i != index)
             {
                 i++;
                 current = current.Next;
             }
 
-            if (current.Next==null)
+            if (current.Next == null)
             {
                 node.Previous = current;
                 current.Next = node;
@@ -136,7 +136,7 @@ namespace DoubleLinkedList
                 node.Next = current.Next;
                 current.Next.Previous = node;
                 current.Next = node;
-                
+
             }
             Count++;
             return true;
@@ -177,7 +177,7 @@ namespace DoubleLinkedList
             }
             else
             {
-                tail.Next=node;
+                tail.Next = node;
                 node.Previous = tail;
             }
             tail = node;
@@ -191,7 +191,7 @@ namespace DoubleLinkedList
             Node<T> current = head;
 
 
-            while (current!=null)
+            while (current != null)
             {
                 if (current.Data.Equals(item))
                 {
@@ -200,7 +200,7 @@ namespace DoubleLinkedList
                 current = current.Next;
             }
 
-            if (current!=null)
+            if (current != null)
             {
                 if (current.Next != null) //if node not last
                 {
@@ -231,7 +231,8 @@ namespace DoubleLinkedList
 
         public void RemoveFirst()
         {
-            if (Count!=0) {
+            if (Count != 0)
+            {
                 if (head.Next == null)
                 {
                     head = null;
@@ -252,7 +253,7 @@ namespace DoubleLinkedList
 
         public void RemoveLast()
         {
-            if (Count!=0)
+            if (Count != 0)
             {
                 if (head.Next == null)
                 {
@@ -262,9 +263,9 @@ namespace DoubleLinkedList
                 else
                 {
                     tail = tail.Previous;
-                    tail.Next=null;
-                    
-                    
+                    tail.Next = null;
+
+
                 }
                 Count--;
             }
@@ -272,6 +273,24 @@ namespace DoubleLinkedList
 
         }
 
+        #endregion
+        #region Method Find(return first position item if the list contains an item and -1 not contains)
+
+        public int Find(T item)
+        {
+            Node<T> current = head;
+            int i = 0;
+
+            while (current!=null)
+            {
+                if (current.Data.Equals(item))
+                    return i;
+                current = current.Next;
+                i++;
+            }
+            return -1;
+        }
+            
         #endregion
 
     }
@@ -337,10 +356,18 @@ namespace DoubleLinkedList
 
             #endregion
 
+            #region Find
+
+            Console.WriteLine("Find item 7");
+            Console.WriteLine("position - "+linkedList.Find(7));
+            Console.WriteLine();
+
+            #endregion
+
             #region RemoveFirst
 
             linkedList.RemoveFirst();
-            Display("RemoveFirs", linkedList);
+            Display("RemoveFirst", linkedList);
 
             #endregion
 
