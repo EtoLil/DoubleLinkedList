@@ -281,7 +281,7 @@ namespace DoubleLinkedList
             Node<T> current = head;
             int i = 0;
 
-            while (current!=null)
+            while (current != null)
             {
                 if (current.Data.Equals(item))
                     return i;
@@ -290,8 +290,46 @@ namespace DoubleLinkedList
             }
             return -1;
         }
-            
+
         #endregion
+        #region Method Amount(return quantity of elements with value 'x'(item)  )
+
+        public int Amount(T item)
+        {
+            int amount = 0;
+            Node<T> current = head;
+
+            while (current != null)
+            {
+                if (current.Data.Equals(item))
+                    amount++;
+                current = current.Next;
+            }
+
+            return amount;
+        }
+
+        #endregion
+        #region Reverese()
+
+        public void Reverse()
+        {
+            Node<T> current_tail = tail;
+            Node<T> current_head = head;
+            T Data = current_head.Data;
+
+            for (int i=0;i<Count/2 ;++i)
+            {
+                current_head.Data = current_tail.Data;
+                current_tail.Data = Data;
+                current_head = current_head.Next;
+                current_tail = current_tail.Previous;
+                Data = current_head.Data;
+            }
+        }
+
+        #endregion
+
 
     }
 
@@ -338,10 +376,11 @@ namespace DoubleLinkedList
 
             #region Add item
 
-            linkedList.AddFirst(2);
+            linkedList.AddFirst(1);
             linkedList.AddFirst(4);
             linkedList.AddLast(7);
             linkedList.AddFirst(6);
+            linkedList.AddLast(1);
             linkedList.AddLast(1);
 
             Display("Add", linkedList);
@@ -353,6 +392,21 @@ namespace DoubleLinkedList
             linkedList.AddAfter(47, 3);
             Display("Add item after index 3",linkedList);
 
+
+            #endregion
+
+            #region Amount
+
+            Console.WriteLine("Amount 1");
+            Console.WriteLine("amount - "+linkedList.Amount(1));
+            Console.WriteLine();
+
+            #endregion
+
+            #region Reverse
+
+            linkedList.Reverse();
+            Display("Reverse", linkedList);
 
             #endregion
 
